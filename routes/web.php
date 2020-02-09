@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return redirect('series');
+    return redirect('welcome');
 });
 
 Auth::routes();
@@ -42,7 +42,8 @@ Route::get('/series', function(){
 //แสดงฟอร์มสร้าง ซี่รี่ส์/ตอน
 Route::get('/series/create',function(){
     return view('serie.create');
-})->name('create');
+})->name('create')->middleware('auth');
+
 Route::get('/series/{serieid}/episodes/create',function($serieid){
     return view('episode.create')->with(['serieid' => $serieid]);
 });
