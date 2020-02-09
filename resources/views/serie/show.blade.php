@@ -11,7 +11,7 @@
     <ul>
         @foreach($serie->episodes as $episode)
         <li>
-            <a href="{{url('')}}">{{ $episode->title }}</a>
+            <a href="{{url('/episodes/'.$episode->id)}}">{{ $episode->title }}</a>
         </li>
         @endforeach
     </ul>

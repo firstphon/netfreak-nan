@@ -15,10 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return redirect('series');
+});
+
 Auth::routes();
 
-Route::get('/test-video', function () {
-    return view('partials.vimeo-video-player');
+Route::get('/video', function ($id) {
+
+    $video=\App\partials::all();
+
+    $hosting->hosting =$id;
+
+    $file_name->file_name =$id; 
+
+    return view('partials.'.$hosting.'-video-player')->with(['file_name'=> $file_name]);
 });
 
 //แสดงรายการ ซี่รี่ส์/ตอน index
@@ -76,6 +87,14 @@ Route::get('/series/{serie}',function(\App\Serie $serie){
         'serie' => $serie
     ]);
     return $id;
+
+});
+Route::get('/episodes/{episode}',function(\App\Episode $episode){
+    $player='partials.'.$episode->hosting.'-video-player';
+    return view('episode.show')->with([
+        'episode' => $episode,
+        'player'=>$player,
+    ]);
 
 });
 
